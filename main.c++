@@ -1,7 +1,4 @@
 #include "libreria.h"
-#include <iostream>
-#include <sstream>
-#include <string>
 
 int main() {
     char opcion;
