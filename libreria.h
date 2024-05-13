@@ -11,10 +11,10 @@ void mostrarMenu() {
     cout << "6. Salir\n";
 }
 
-void cambiarColorTexto(char texto[]) {
+void cambiarColorTexto(char texto[]){
     // Códigos de escape ANSI para colores
     char RESET[] = "\033[0m";
-    char BLACK[] = "\033[30m";
+    char BLACK[] = "\033[30m";  
     char RED[] = "\033[31m";
     char GREEN[] = "\033[32m";
     char YELLOW[] = "\033[33m";
@@ -83,9 +83,95 @@ void cambiarColorTexto(char texto[]) {
     cout << "\nEl color del texto ha sido cambiado.\n";
 }
 
-void cambiarMayusculaMinuscula() {
-    // Implementa la función para cambiar mayúsculas y minúsculas
+// Función para cambiar de mayúsculas a minúsculas
+string cambiarAMinusculas(string texto) {
+    for (char &c : texto) {
+        if (isupper(c)) {
+            c = tolower(c);
+        }
+    }
+    return texto;
 }
+
+// Función para cambiar de minúsculas a mayúsculas
+string cambiarAMayusculas(string texto) {
+    for (char &c : texto) {
+        if (islower(c)) {
+            c = toupper(c);
+        }
+    }
+    return texto;
+}
+
+// Función para convertir la primera letra en mayúscula
+string tipoOracion(string texto) {
+    if (!texto.empty()) {
+        texto[0] = toupper(texto[0]);
+    }
+    return texto;
+}
+
+// Función para poner en mayúscula cada palabra
+string primeraLetraMayuscula(string texto) {
+    for (int i = 0; i < texto.length(); ++i) {
+        if (i == 0 || texto[i - 1] == ' ') {
+            texto[i] = toupper(texto[i]);
+        }
+    }
+    return texto;
+}
+
+// Función para alternar mayúsculas y minúsculas
+string alternarMayusculasMinuculas(string texto) {
+    for (char &c : texto) {
+        if (isalpha(c)) {
+            if (islower(c)) {
+                c = toupper(c);
+            } else {
+                c = tolower(c);
+            }
+        }
+    }
+    return texto;
+}
+
+void menu() {
+    string texto;
+    int opcion;
+
+    cout << "Ingrese un texto: ";
+    getline(cin, texto);
+
+    cout << "Seleccione una opción:" << endl;
+    cout << "1. Cambiar de Mayúsculas a Minúsculas" << endl;
+    cout << "2. Cambiar de Minúsculas a Mayúsculas" << endl;
+    cout << "3. Tipo Oración" << endl;
+    cout << "4. Poner en mayúscula cada palabra" << endl;
+    cout << "5. Alternar Mayúscula/Minúscula" << endl;
+    cout << "Opción: ";
+    cin >> opcion;
+
+    switch (opcion) {
+        case 1:
+            cout << "Texto convertido: " << cambiarAMinusculas(texto) << endl;
+            break;
+        case 2:
+            cout << "Texto convertido: " << cambiarAMayusculas(texto) << endl;
+            break;
+        case 3:
+            cout << "Texto convertido: " << tipoOracion(texto) << endl;
+            break;
+        case 4:
+            cout << "Texto convertido: " << primeraLetraMayuscula(texto) << endl;
+            break;
+        case 5:
+            cout << "Texto convertido: " << alternarMayusculasMinuculas(texto) << endl;
+            break;
+        default:
+            cout << "Opción no válida." << endl;
+    }
+}
+
 
 void copiarCortarPegar() {
     // Implementa la función para copiar, cortar y pegar texto

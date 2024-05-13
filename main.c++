@@ -19,7 +19,7 @@ int main() {
                 cambiarColorTexto(texto);
                 break;
             case '2':
-                cambiarMayusculaMinuscula();
+                menu();
                 break;
             case '3':
                 copiarCortarPegar();
