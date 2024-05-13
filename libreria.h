@@ -35,37 +35,37 @@ void cambiarColorTexto(char texto[]) {
     cout << "8. Blanco\n";
     cout << "9. Reset (Volver al color predeterminado)\n";
 
-    int opcion;
+    char opcion;
     cout << "Seleccione el color deseado: ";
     cin >> opcion;
 
     // Cambiar el color según la opción seleccionada
     switch(opcion) {
-        case 1:
+        case '1':
             cout << BLACK;
             break;
-        case 2:
+        case '2':
             cout << RED;
             break;
-        case 3:
+        case '3':
             cout << GREEN;
             break;
-        case 4:
+        case '4':
             cout << YELLOW;
             break;
-        case 5:
+        case '5':
             cout << BLUE;
             break;
-        case 6:
+        case '6':
             cout << MAGENTA;
             break;
-        case 7:
+        case '7':
             cout << CYAN;
             break;
-        case 8:
+        case '8':
             cout << WHITE;
             break;
-        case 9:
+        case '9':
             cout << RESET;
             break;
         default:
