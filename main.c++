@@ -2,6 +2,7 @@
 
 int main() {
     char opcion;
+    
 
     do {
         mostrarMenu();
