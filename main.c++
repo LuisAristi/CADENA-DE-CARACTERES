@@ -7,7 +7,7 @@ int main() {
 	setlocale(LC_ALL, "spanish");
     char opcion;
 // Ventana de presentación del proyecto.
-    cout << "BIENVENIDO A NUESTRO SOFTWARE, ESTE PROGRAMA HA SIDO DESARROLLADO POR:"
+    cout << "BIENVENIDO A NUESTRO SOFTWARE, ESTE PROGRAMA HA SIDO DESARROLLADO POR: "
 		 << endl;
 	cout << "\nJulian Rojas: 0222320040        Eduardo Tuñon: 0222320052        "
        		"Luis Aristizabal: 0222310005\nEstudiantes de Ingenieria de "
@@ -52,7 +52,7 @@ int main() {
                 //menu();
                 break;
             case '3':
-                copiarCortarPegar();
+                copiarCortarPegar(texto); //CAMBIO: PUSE TEXTO COMO PARAMETRO
                 break;
             case '4':
                 buscarReemplazarSustraer(texto);
