@@ -52,7 +52,7 @@ int main() {
                 //menu();
                 break;
             case '3':
-                copiarCortarPegar(texto); //CAMBIO: PUSE TEXTO COMO PARAMETRO
+                copiarCortarPegar(texto);
                 break;
             case '4':
                 buscarReemplazarSustraer(texto);
