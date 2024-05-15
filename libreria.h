@@ -156,8 +156,9 @@ char* alternarMayusculasMinuculas(char texto[]) {
 
 void menu(char texto[]) {
     char opcion;
-    system("cls");		
+    	
     do{
+	system("cls");	
     cout << "Seleccione una opción:" << endl;
     cout << "1. Cambiar de Mayúsculas a Minúsculas" << endl;
     cout << "2. Cambiar de Minúsculas a Mayúsculas" << endl;
@@ -189,7 +190,9 @@ void menu(char texto[]) {
             break;
         default:
             cout << "Opción no válida." << endl;
+            break;
     }
+    system("pause");
     }while(opcion != '6');
 }
 
