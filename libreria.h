@@ -296,3 +296,200 @@ void resumenTexto() {
 void salir() {
     cout << "Saliendo del procesador de texto...\n";
 }
+
+void copiarCortarPegar(char* texto[]){ //Funcion principal para las funciones COPIAR, CORTAR Y PEGAR
+
+  int opc; //Declaramos una variable paa la opcion del usuario
+
+  do{ //Creamos un do while para que el programa se repita hasta que el usuario quiera salir
+    
+  cout << "MENU PARA COPIAR, CORTAR Y PEGAR\n" << endl;
+  cout << "1. Copiar" << endl;
+  cout << "2. Cortar" << endl;
+  cout << "3. Salir" << endl;
+  cout << "\nIngrese la accion que desea realizarle al texto: " << endl;
+  cin >> opc;
+
+    switch(opc){
+
+      case 1:
+        copiar(texto[]);
+        break;
+
+      case 2:
+        cortar(texto[]);
+        break;
+
+      case 3:
+        cout << "Saliendo de la funcion..." << endl;
+        break;
+
+      default:
+        cout << "Opcion no valida" << endl;
+        break;
+    }
+  }while(opc !=3);
+}
+
+/*-----------------------------------------------------------------------------*/
+
+//Funcion copiar, hara la funcion de copiar una parte del texto ingresado por el usuario y retornara la parte que eligio el usuario
+void copiar(char* texto[]){ 
+
+  int validador = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
+  int opc; //Declaramos una variable para la opcion del usuario
+  int longitud; //Declaramos una variable para la longitud del texto
+  char palabra[100]; //Declaramos un arreglo para guardar la palabra que el usuario ingrese
+  
+  longitud = strlen(texto[]); //Calculamos la longitud del texto que ingreso el usuario
+
+  char copia [longitud + 1]; //Declaramos un char con el tamaño de la variable texto mas 1 para que se pueda copiar el texto (COMPLETO) si el usuario lo desea.
+  
+  int inicio, fin;
+
+  do{
+  cout << "Digite el indice desde donde se quiere copiar el texto" << endl;
+  cin >> inicio;
+  cout << "Digite el indice hasta donde se quiere copiar el texto" << endl;
+  cin >> fin;
+
+  if(inicio < 0 || inicio > longitud || fin < 0 || fin > longitud || fin < inicio ){ //Se valida que el usuario ingrese un indice que exista en el texto
+    cout << "Indice fuera de rango, ingrese valores validos." << endl;  
+  }else{
+    a = 1;
+    }
+  }while(a == 0); //Validamos que los indices ingresados sean validos
+    
+  a = 0; //Reiniciamos la variable a para que se pueda volver a usar en el siguiente switch
+    
+  for(int i = inicio; i < fin; i++){ //Recorremos el texto desde el indice inicial hasta el indice final y lo guardamos en el char copia.
+    
+    copia[i] = texto[i];
+    
+  }
+
+  do{
+    
+  cout << "Digite la palabra identificadora para pegar la parte copiada: " << endl;
+  cin.getline(palabra, sizeof(texto));
+
+  char* resultado = strstr(texto, palabra);
+
+    if(resultado){
+      a = 1;
+    }else{
+      cout << "Palabra no encontrada, ingrese otra palabra contenida en el texto." << endl;
+    }
+    
+  }while(a == 0);
+
+  do{
+  cout << "Desea pegar la parte copiada antes o despues de la palabra identificadora" << endl;
+  cout << "1. Antes" << endl;
+  cout << "2. Despues" << endl;
+  cin >> opc;
+
+  switch(opc){
+    
+    case 1:
+      strcat(copia, palabra);
+      cout << "La parte copiada se pego antes de la palabra identificadora" << endl;
+      break;
+
+    case 2:
+      strcat(palabra, copia);
+      cout << "La parte copiada se pego despues de la palabra identificadora" << endl;
+      break;
+
+    default:
+      cout << "Opcion no valida" << endl;
+      break;
+  }  
+  }while(opc != 1 && opc != 2);
+  }
+  
+}
+
+/*-----------------------------------------------------------------------------*/
+
+//Funcion cortar, hara la funcion de copiar una parte del texto ingresado por el usuario, despues lo eliminara.
+void cortar(char* texto[]){ 
+
+  int validador = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
+  int opc; //Declaramos una variable para la opcion del usuario
+  int longitud; //Declaramos una variable para la longitud del texto
+  char palabra[100]; //Declaramos un arreglo para guardar la palabra que el usuario ingrese
+  
+  longitud = strlen(texto[]); //Calculamos la longitud del texto que ingreso el usuario
+
+  char copia [longitud + 1]; //Declaramos un char con el tamaño de la variable texto mas 1 para que se pueda copiar el texto (COMPLETO) si el usuario lo desea.
+  
+  int inicio, fin;
+
+  do{
+  cout << "Digite el indice desde donde se quiere copiar el texto" << endl;
+  cin >> inicio;
+  cout << "Digite el indice hasta donde se quiere copiar el texto" << endl;
+  cin >> fin;
+
+  if(inicio < 0 || inicio > longitud || fin < 0 || fin > longitud || fin < inicio ){ //Se valida que el usuario ingrese un indice que exista en el texto
+    cout << "Indice fuera de rango, ingrese valores validos." << endl;  
+  }else{
+    a = 1;
+    }
+  }while(a == 0); //Validamos que los indices ingresados sean validos
+
+  a = 0; //Reiniciamos la variable a para que se pueda volver a usar en el siguiente switch
+    
+  for(int i = inicio; i < fin; i++){ //Recorremos el texto desde el indice inicial hasta el indice final y lo guardamos en el char copia.
+    
+    copia[i] = texto[i];
+    
+  }
+
+  for(int i = inicio; i < fin, i++){ //Recorremos el texto desde el indice inicial hasta el final y lo eliminamos del texto.
+
+    texto[i] = ' ';
+    
+  }
+
+  do{
+    
+  cout << "Digite la palabra identificadora para pegar la parte copiada: " << endl;
+  cin.getline(palabra, sizeof(texto));
+
+  char* resultado = strstr(texto, palabra);
+
+    if(resultado){
+      a = 1;
+    }else{
+      cout << "Palabra no encontrada, ingrese otra palabra contenida en el texto." << endl;
+    }
+    
+  }while(a == 0);
+
+  do{
+  cout << "Desea pegar la parte copiada antes o despues de la palabra identificadora" << endl;
+  cout << "1. Antes" << endl;
+  cout << "2. Despues" << endl;
+  cin >> opc;
+
+  switch(opc){
+    
+    case 1:
+      strcat(copia, palabra);
+      cout << "La parte copiada se pego antes de la palabra identificadora" << endl;
+      break;
+
+    case 2:
+      strcat(palabra, copia);
+      cout << "La parte copiada se pego despues de la palabra identificadora" << endl;
+      break;
+
+    default:
+      cout << "Opcion no valida" << endl;
+      break;
+  }  
+  }while(opc != 1 && opc != 2);
+  }
+}
