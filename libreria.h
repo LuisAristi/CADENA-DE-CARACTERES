@@ -1,18 +1,21 @@
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <cctype> // Para las funciones de manipulación de caracteres
 
 using namespace std;
 
 void mostrarMenu() {
     cout << "=== PROCESADOR DE TEXTO ===\n";
-    cout << "1. Formato de texto\n";
-    cout << "2. Resumen del texto\n";
+    cout << "1. Cambiar color del texto.\n";
+    cout << "2. Cambiar Mayúscula y Minúscula\n";
+    cout << "3. Copiar, Cortar y Pegar.\n";
+    cout << "4. Buscar, reemplazar y sustraer.\n";
+    cout << "5. Resumen del texto.\n";
     cout << "6. Salir\n";
 }
 
 void cambiarColorTexto(char texto[]){
-    // Códigos de escape ANSI para colores
+    // CÃ³digos de escape ANSI para colores
     char RESET[] = "\033[0m";
     char BLACK[] = "\033[30m";  
     char RED[] = "\033[31m";
@@ -177,8 +180,113 @@ void copiarCortarPegar() {
     // Implementa la función para copiar, cortar y pegar texto
 }
 
-void buscarYReemplazar() {
-    // Implementa la función para buscar y reemplazar texto
+void buscar(char texto[]) {
+
+	fflush(stdin);
+    char cadena[30000];
+	cout << "Ingrese la cadena a buscar: ";
+    cin.getline(cadena, 30000);
+
+	//La función únicamente indica si la cadena fue o no encontrado en el texto.
+	if(strstr(texto, cadena)) {
+		cout << "\"" << cadena << "\""  << "fue encontrada dentro de \"" << texto << "\".";
+	}
+	else {
+		cout << "\"" << cadena << "\""  << " no fue encontrada dentro de \"" << texto << "\".";
+	}
+}
+
+void reemplazar(char texto[]) {
+	fflush(stdin);
+    char buscar[30000];
+	cout << "Ingrese la cadena a buscar: ";
+    cin.getline(buscar, 30000);
+    
+    fflush(stdin);
+    char reemplazar[30000];
+	cout << "Ingrese la cadena a reemplazar: ";
+    cin.getline(reemplazar, 30000);
+    
+    //Punteros inicializados para cada array.
+    char* t = texto;
+    char* r = reemplazar;
+    char* b = buscar;
+    
+    //Busca si "buscar" esta dentro de "texto" comparando caracter por caracter
+    for (int i = 0; i < strlen(texto); ++i) {
+    	bool encontrado = true;
+        for (int j = 0; j < strlen(buscar); ++j) {
+            if (t[i + j] != b[j]) {
+                encontrado = false;
+                break;
+            }
+        }
+		//Cada vez que se encuentre se reemplaza lo almacenado en "reemplazar" en "texto".
+        if (encontrado) {
+            for (int j = 0; j < strlen(reemplazar); ++j) {
+                t[i + j] = r[j];
+            }
+            i += strlen(reemplazar) - 1;
+    	}
+	}
+	
+	cout << "Texto reemplazado:\n" << texto;
+}
+
+void sustraer(char texto[]) {
+	fflush(stdin);
+    char quitar[30000];
+	cout << "Ingrese la cadena a sustraer: ";
+    cin.getline(quitar, 30000);
+    
+    
+    char* t = texto;
+    char* q = quitar;
+    
+	//Se busca "quitar" dentro de "texto"
+    for (int i = 0; i < strlen(texto); ++i) {
+    	bool encontrado = true;
+        for (int j = 0; j < strlen(quitar); ++j) {
+            if (t[i + j] != q[j]) {
+                encontrado = false;
+                break;
+            }
+        }
+        
+		//Cada que se encuentre se reemplazara por un espacio cada caracter.
+        if (encontrado) {
+        	for(int j=0; j < strlen(quitar); j++) {
+        		t[i+j] = ' ';
+			}
+    	}
+	}
+	cout << "Texto luego de substracción:\n" << texto;
+}
+
+void buscarReemplazarSustraer(char texto[]) {
+	int opcion;
+    cout << "Seleccione una opción:" << endl;
+    cout << "1. Ingresar una cadena y buscarla dentro del texto." << endl;
+    cout << "2. Ingresar una cadena y reemplazarla por otra indicada dentro del texto." << endl;
+    cout << "3. Ingresar una cadena y eliminarla del texto." << endl;
+    cout << "Opción: ";
+    cin >> opcion;
+
+    switch (opcion) {
+        case 1:
+        	buscar(texto);
+            break;
+            
+        case 2:
+            reemplazar(texto);
+            break;
+        case 3:
+            sustraer(texto);
+            break;
+        default:
+            cout << "Opción no reconocida" << std::endl;
+            break;
+    }
 }
 
 void resumenTexto() {
