@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string.h>
-#include <cctype> // Para las funciones de manipulación de caracteres
 
 using namespace std;
 
@@ -86,37 +85,28 @@ void cambiarColorTexto(char texto[]){
     cout << "\nEl color del texto ha sido cambiado.\n";
 }
 
-// Función para cambiar de mayúsculas a minúsculas
-string cambiarAMinusculas(string texto) {
-    for (char &c : texto) {
-        if (isupper(c)) {
-            c = tolower(c);
+// Función para convertir la primera letra después de cada espacio en mayúscula
+char* tipoOracion(char* texto) {
+    int longitud = strlen(texto);
+    int convertir = 1; // Bandera para indicar si se debe convertir el próximo carácter
+    for (int i = 0; i < longitud; ++i) {
+        // Si el carácter actual es un espacio, se establece la bandera para convertir el próximo carácter
+        if (texto[i] == 32){
+            convertir = 1;
         }
-    }
-    return texto;
-}
-
-// Función para cambiar de minúsculas a mayúsculas
-string cambiarAMayusculas(string texto) {
-    for (char &c : texto) {
-        if (islower(c)) {
-            c = toupper(c);
+        // Si la bandera está activa y el carácter actual es una letra, se convierte a mayúscula
+        else if (convertir && texto[i] >= 'a' && texto[i] <= 'z') {
+            texto[i] = toupper(texto[i]);
+            convertir = 0; // Se desactiva la bandera después de convertir el carácter
         }
-    }
-    return texto;
-}
-
-// Función para convertir la primera letra en mayúscula
-string tipoOracion(string texto) {
-    if (!texto.empty()) {
-        texto[0] = toupper(texto[0]);
     }
     return texto;
 }
 
 // Función para poner en mayúscula cada palabra
-string primeraLetraMayuscula(string texto) {
-    for (int i = 0; i < texto.length(); ++i) {
+char* primeraLetraMayuscula(char texto[]) {
+    int longitud = strlen(texto);
+    for (int i = 0; i < longitud; ++i) {
         if (i == 0 || texto[i - 1] == ' ') {
             texto[i] = toupper(texto[i]);
         }
@@ -124,27 +114,50 @@ string primeraLetraMayuscula(string texto) {
     return texto;
 }
 
-// Función para alternar mayúsculas y minúsculas
-string alternarMayusculasMinuculas(string texto) {
-    for (char &c : texto) {
-        if (isalpha(c)) {
-            if (islower(c)) {
-                c = toupper(c);
-            } else {
-                c = tolower(c);
+char* mayusculasMinuculas(char texto[]) {
+    int longitud = strlen(texto);
+    for (int i = 0; i < longitud; ++i) {
+        if(texto[i] >= 'A' && texto[i] <= 'Z') {
+            if (texto[i] >= 'a' && texto[i] <= 'z') {
+                texto[i] = texto[i] - 32; // Convertir minúscula a mayúscula
             }
         }
     }
     return texto;
 }
 
-void menu() {
-    string texto;
-    int opcion;
+char* minuculasMayusculas(char texto[]) {
+    int longitud = strlen(texto);
+    for (int i = 0; i < longitud; ++i) {
+        if ((texto[i] >= 'a' && texto[i] <= 'z')) {
+            if (texto[i] >= 'a' && texto[i] <= 'z') {
+                texto[i] = texto[i] - 32; // Convertir minúscula a mayúscula
+            }
+        }
+    }
+    return texto;
+}
 
-    cout << "Ingrese un texto: ";
-    getline(cin, texto);
+char* alternarMayusculasMinuculas(char texto[]) {
+    int longitud = strlen(texto);
+    for (int i = 0; i < longitud; ++i) {
+        if ((texto[i] >= 'a' && texto[i] <= 'z') || (texto[i] >= 'A' && texto[i] <= 'Z')) {
+            if (texto[i] >= 'a' && texto[i] <= 'z') {
+                texto[i] = texto[i] - 32; // Convertir minúscula a mayúscula
+            }
+            else{
+                texto[i] = texto[i] + 32; // Convertir mayúscula a minúscula 
+            }
 
+        }
+    }
+    return texto;
+}
+
+void menu(char texto[]) {
+    char opcion;
+
+    do{
     cout << "Seleccione una opción:" << endl;
     cout << "1. Cambiar de Mayúsculas a Minúsculas" << endl;
     cout << "2. Cambiar de Minúsculas a Mayúsculas" << endl;
@@ -155,30 +168,30 @@ void menu() {
     cin >> opcion;
 
     switch (opcion) {
-        case 1:
-            cout << "Texto convertido: " << cambiarAMinusculas(texto) << endl;
+        case '1':
+            cout << "Texto convertido: " << mayusculasMinuculas(texto) << endl;
             break;
-        case 2:
-            cout << "Texto convertido: " << cambiarAMayusculas(texto) << endl;
+        case '2':
+            cout << "Texto convertido: " << minuculasMayusculas(texto) << endl;
             break;
-        case 3:
+        case '3':
             cout << "Texto convertido: " << tipoOracion(texto) << endl;
             break;
-        case 4:
+        case '4':
             cout << "Texto convertido: " << primeraLetraMayuscula(texto) << endl;
             break;
-        case 5:
+        case '5':
+            cout << "Texto convertido: " << alternarMayusculasMinuculas(texto) << endl;
+            break;
+        case '6':
             cout << "Texto convertido: " << alternarMayusculasMinuculas(texto) << endl;
             break;
         default:
             cout << "Opción no válida." << endl;
     }
+    }while(opcion != '6');
 }
 
-
-void copiarCortarPegar() {
-    // Implementa la función para copiar, cortar y pegar texto
-}
 
 void buscar(char texto[]) {
 
@@ -290,14 +303,14 @@ void buscarReemplazarSustraer(char texto[]) {
 }
 
 //Funcion copiar, hara la funcion de copiar una parte del texto ingresado por el usuario y retornara la parte que eligio el usuario
-void copiar(char* texto[]){
+void copiar(char texto[]){
 
-  int validador = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
+  int a = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
   int opc; //Declaramos una variable para la opcion del usuario
   int longitud; //Declaramos una variable para la longitud del texto
   char palabra[100]; //Declaramos un arreglo para guardar la palabra que el usuario ingrese
   
-  longitud = strlen(texto[]); //Calculamos la longitud del texto que ingreso el usuario
+  longitud = strlen(texto); //Calculamos la longitud del texto que ingreso el usuario
 
   char copia [longitud + 1]; //Declaramos un char con el tamaño de la variable texto mas 1 para que se pueda copiar el texto (COMPLETO) si el usuario lo desea.
   
@@ -327,7 +340,7 @@ void copiar(char* texto[]){
   do{
     
   cout << "Digite la palabra identificadora para pegar la parte copiada: " << endl;
-  cin.getline(palabra, sizeof(texto));
+  cin.getline(palabra, 100, ' ');
 
   char* resultado = strstr(texto, palabra);
 
@@ -363,17 +376,16 @@ void copiar(char* texto[]){
   }  
   }while(opc != 1 && opc != 2);
   } 
-}
 
 //Funcion cortar, hara la funcion de copiar una parte del texto ingresado por el usuario, despues lo eliminara.
-void cortar(char* texto[]){ 
+void cortar(char texto[]){ 
 
-  int validador = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
+  int a = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
   int opc; //Declaramos una variable para la opcion del usuario
   int longitud; //Declaramos una variable para la longitud del texto
   char palabra[100]; //Declaramos un arreglo para guardar la palabra que el usuario ingrese
   
-  longitud = strlen(texto[]); //Calculamos la longitud del texto que ingreso el usuario
+  longitud = strlen(texto); //Calculamos la longitud del texto que ingreso el usuario
 
   char copia [longitud + 1]; //Declaramos un char con el tamaño de la variable texto mas 1 para que se pueda copiar el texto (COMPLETO) si el usuario lo desea.
   
@@ -400,7 +412,7 @@ void cortar(char* texto[]){
     
   }
 
-  for(int i = inicio; i < fin, i++){ //Recorremos el texto desde el indice inicial hasta el final y lo eliminamos del texto.
+  for(int i = inicio; i < fin; i++){ //Recorremos el texto desde el indice inicial hasta el final y lo eliminamos del texto.
 
     texto[i] = ' ';
     
@@ -409,7 +421,7 @@ void cortar(char* texto[]){
   do{
     
   cout << "Digite la palabra identificadora para pegar la parte copiada: " << endl;
-  cin.getline(palabra, sizeof(texto));
+  cin.getline(palabra, 100, ' ');
 
   char* resultado = strstr(texto, palabra);
 
@@ -445,9 +457,8 @@ void cortar(char* texto[]){
   }  
   }while(opc != 1 && opc != 2);
   }
-}
 
-void copiarCortarPegar(char* texto[]){ //Funcion principal para las funciones COPIAR, CORTAR Y PEGAR
+void copiarCortarPegar(char texto[]){ //Funcion principal para las funciones COPIAR, CORTAR Y PEGAR
 
   int opc; //Declaramos una variable paa la opcion del usuario
 
@@ -481,8 +492,89 @@ void copiarCortarPegar(char* texto[]){ //Funcion principal para las funciones CO
   }while(opc !=3);
 }
 
-void resumenTexto() {
-    // Implementa la función para mostrar el resumen del texto
+// Función para contar la cantidad de palabras en el texto
+int contarPalabras(char texto[]) {
+    int palabras = 0, i = 0;
+    bool dentroPalabra = false;
+    
+    while (texto[i] != '\0') {
+        if (texto[i] == ' ') {
+            dentroPalabra = false;
+        } else if (!dentroPalabra) {
+            dentroPalabra = true;
+            palabras++;
+        }
+        i++;
+    }
+    
+    return palabras;
+}
+
+// Función para contar la cantidad de caracteres alfabéticos en el texto
+int contarCaracteresAlfabeticos(char texto[]) {
+    int caracteres = 0;
+
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] >= 65 && texto[i] <= 97 || texto[i] >= 97 && texto[i] <= 122) {
+            caracteres++;
+        }
+    }
+    
+    return caracteres;
+}
+
+// Función para contar la cantidad de caracteres numéricos en el texto
+int contarCaracteresNumericos(char texto[]) {
+    int caracteres = 0;
+    
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] >= 48 && texto[i] <= 57) {
+            caracteres++;
+        }
+    }
+    
+    return caracteres;
+}
+
+// Función para contar la cantidad de caracteres especiales en el texto
+int contarCaracteresEspeciales(char texto[]) {
+    int caracteres = 0;
+    
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] < 65 || texto[i] > 122 && texto[i] != 32 && texto[i] < 48 || texto[i] > 57){
+            caracteres++;
+        }
+    }
+    
+    return caracteres;
+}
+
+// Función para contar la cantidad de espacios en blanco en el texto
+int contarEspaciosBlancos(char texto[]) {
+    int espacios = 0;
+    
+    for (int i = 0; i < strlen(texto); i++) {
+        if (texto[i] == 32) {
+            espacios++;
+        }
+    }
+    
+    return espacios;
+}
+
+void resumirTexto(char texto[]) {
+    int palabras = contarPalabras(texto);
+    int caracteresAlfabeticos = contarCaracteresAlfabeticos(texto);
+    int caracteresNumericos = contarCaracteresNumericos(texto);
+    int caracteresEspeciales = contarCaracteresEspeciales(texto);
+    int espaciosBlancos = contarEspaciosBlancos(texto);
+    
+    cout << "Resumen del texto:" << endl;
+    cout << "Cantidad de palabras: " << palabras << endl;
+    cout << "Cantidad de caracteres alfabéticos: " << caracteresAlfabeticos << endl;
+    cout << "Cantidad de caracteres numéricos: " << caracteresNumericos << endl;
+    cout << "Cantidad de caracteres especiales: " << caracteresEspeciales << endl;
+    cout << "Cantidad de espacios en blanco: " << espaciosBlancos << endl;
 }
 
 void salir() {

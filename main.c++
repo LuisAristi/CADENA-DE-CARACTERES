@@ -1,4 +1,3 @@
-#include <windows.h>
 #include <locale>
 
 #include "libreria.h"
@@ -49,7 +48,7 @@ int main() {
                 cambiarColorTexto(texto);
                 break;
             case '2':
-                menu();
+                menu(texto);
                 break;
             case '3':
                 copiarCortarPegar(texto);
@@ -58,7 +57,7 @@ int main() {
                 buscarReemplazarSustraer(texto);
                 break;
             case '5':
-                resumenTexto();
+                resumirTexto(texto);
                 break;
             case '6':
                 salir();
