@@ -14,7 +14,7 @@ void mostrarMenu() {
 }
 
 void cambiarColorTexto(char texto[]){
-    // CÃ³digos de escape ANSI para colores
+    // Códigos de escape ANSI para colores
     char RESET[] = "\033[0m";
     char BLACK[] = "\033[30m";  
     char RED[] = "\033[31m";
@@ -156,7 +156,7 @@ char* alternarMayusculasMinuculas(char texto[]) {
 
 void menu(char texto[]) {
     char opcion;
-
+    system("cls");		
     do{
     cout << "Seleccione una opción:" << endl;
     cout << "1. Cambiar de Mayúsculas a Minúsculas" << endl;
@@ -164,6 +164,7 @@ void menu(char texto[]) {
     cout << "3. Tipo Oración" << endl;
     cout << "4. Poner en mayúscula cada palabra" << endl;
     cout << "5. Alternar Mayúscula/Minúscula" << endl;
+    cout << "6. Salir" << endl; 
     cout << "Opción: ";
     cin >> opcion;
 
