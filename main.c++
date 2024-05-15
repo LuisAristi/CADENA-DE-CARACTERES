@@ -49,7 +49,7 @@ int main() {
                 cambiarColorTexto(texto);
                 break;
             case '2':
-                //menu();
+                menu();
                 break;
             case '3':
                 copiarCortarPegar(texto);
