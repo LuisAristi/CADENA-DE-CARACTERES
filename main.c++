@@ -1,5 +1,5 @@
 #include <locale>
-
+#include <window.h>
 #include "libreria.h"
 
 int main() {
