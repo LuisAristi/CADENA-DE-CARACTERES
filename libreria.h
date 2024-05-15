@@ -289,52 +289,8 @@ void buscarReemplazarSustraer(char texto[]) {
     }
 }
 
-void resumenTexto() {
-    // Implementa la función para mostrar el resumen del texto
-}
-
-void salir() {
-    cout << "Saliendo del procesador de texto...\n";
-}
-
-void copiarCortarPegar(char* texto[]){ //Funcion principal para las funciones COPIAR, CORTAR Y PEGAR
-
-  int opc; //Declaramos una variable paa la opcion del usuario
-
-  do{ //Creamos un do while para que el programa se repita hasta que el usuario quiera salir
-    
-  cout << "MENU PARA COPIAR, CORTAR Y PEGAR\n" << endl;
-  cout << "1. Copiar" << endl;
-  cout << "2. Cortar" << endl;
-  cout << "3. Salir" << endl;
-  cout << "\nIngrese la accion que desea realizarle al texto: " << endl;
-  cin >> opc;
-
-    switch(opc){
-
-      case 1:
-        copiar(texto[]);
-        break;
-
-      case 2:
-        cortar(texto[]);
-        break;
-
-      case 3:
-        cout << "Saliendo de la funcion..." << endl;
-        break;
-
-      default:
-        cout << "Opcion no valida" << endl;
-        break;
-    }
-  }while(opc !=3);
-}
-
-/*-----------------------------------------------------------------------------*/
-
 //Funcion copiar, hara la funcion de copiar una parte del texto ingresado por el usuario y retornara la parte que eligio el usuario
-void copiar(char* texto[]){ 
+void copiar(char* texto[]){
 
   int validador = 0; //Declaramos una variable para validar que el usuario ingrese una opcion valida
   int opc; //Declaramos una variable para la opcion del usuario
@@ -406,11 +362,8 @@ void copiar(char* texto[]){
       break;
   }  
   }while(opc != 1 && opc != 2);
-  }
-  
+  } 
 }
-
-/*-----------------------------------------------------------------------------*/
 
 //Funcion cortar, hara la funcion de copiar una parte del texto ingresado por el usuario, despues lo eliminara.
 void cortar(char* texto[]){ 
@@ -492,4 +445,46 @@ void cortar(char* texto[]){
   }  
   }while(opc != 1 && opc != 2);
   }
+}
+
+void copiarCortarPegar(char* texto[]){ //Funcion principal para las funciones COPIAR, CORTAR Y PEGAR
+
+  int opc; //Declaramos una variable paa la opcion del usuario
+
+  do{ //Creamos un do while para que el programa se repita hasta que el usuario quiera salir
+    
+  cout << "MENU PARA COPIAR, CORTAR Y PEGAR\n" << endl;
+  cout << "1. Copiar" << endl;
+  cout << "2. Cortar" << endl;
+  cout << "3. Salir" << endl;
+  cout << "\nIngrese la accion que desea realizarle al texto: " << endl;
+  cin >> opc;
+
+    switch(opc){
+
+      case 1:
+        copiar(texto);
+        break;
+
+      case 2:
+        cortar(texto);
+        break;
+
+      case 3:
+        cout << "Saliendo de la funcion..." << endl;
+        break;
+
+      default:
+        cout << "Opcion no valida" << endl;
+        break;
+    }
+  }while(opc !=3);
+}
+
+void resumenTexto() {
+    // Implementa la función para mostrar el resumen del texto
+}
+
+void salir() {
+    cout << "Saliendo del procesador de texto...\n";
 }
